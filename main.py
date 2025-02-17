@@ -93,7 +93,11 @@ class DBOperations:
             self.conn.close()
 
     def get_connection(self):
-        """Establish a fresh connection to the database and return the cursor object, making sure the database connection is active for each operation"""
+        """
+        Establish a fresh connection to the database.
+        Makes sure the database connection is active for each operation
+        """
+
         self.conn = sqlite3.connect("FlightManagement.db")
         self.cur = self.conn.cursor()
 
@@ -589,20 +593,24 @@ class DBOperations:
             self.conn.close()
 
     def summarise_flights_by_destination(self):
-        """Shows a summary of flights per destination."""
+        """Show number of flights per destination."""
         try:
             self.get_connection()
+
+            # SQL query to count flights by destination
             query = """
             SELECT d.city, COUNT(f.flight_id) as flight_count
             FROM flights f
-            JOIN destinations d ON f.destination_id = d.destination_id
+            JOIN destinations AS d ON f.destination_id = d.destination_id
             GROUP BY d.city
             """
             self.cur.execute(query)
             results = self.cur.fetchall()
+
             print("\nFlight Counts by Destination:")
+            # Print into table
             for row in results:
-                print(f"Destination: {row[0]} -- {row[1]} flights")
+                print(f"Destination: {row[0]}: {row[1]} flight(s)")
         except Exception as e:
             print(f"Error summarising flights: {e}")
         finally:
