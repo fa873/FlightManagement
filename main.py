@@ -4,7 +4,7 @@ import datetime
 
 class DBOperations:
     """
-    Handles all database operations such as table creation, CRUD actions,
+    Handles all database operations such as table creation, CRUD operations,
     and SQL query execution for flights, pilots, destinations, and
     pilot assignments.
     """
