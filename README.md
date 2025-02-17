@@ -7,7 +7,8 @@ This Python application was built to manage flights, pilots, and destinations fo
 - Running `main.py` with Python will start the application in the terminal
 - The user is presented with options selected by entering an integer
 - The FlightManagement.db file is pre-populated with sample data
-- If FlightManagement.db is deleted, it can be re-populated with sample data by selecting the Populate Sample Data option in the menu
+- If FlightManagement.db is deleted, it can be re-populated with sample data by selecting the 'Populate Sample Data' option in the menu
+- If FlightManagement.db already exists, the 'Populate Sample Data' option will fail due to certain data already existing in the database.
 
 ## Features
 
