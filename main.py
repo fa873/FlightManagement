@@ -93,11 +93,7 @@ class DBOperations:
             self.conn.close()
 
     def get_connection(self):
-        """
-        Establish a fresh connection to the database.
-        Makes sure the database connection is active for each operation
-        """
-
+        """Establish a fresh connection to the database and return the cursor object, making sure the database connection is active for each operation"""
         self.conn = sqlite3.connect("FlightManagement.db")
         self.cur = self.conn.cursor()
 
@@ -476,7 +472,7 @@ class DBOperations:
 
             query = """
             SELECT p.name, f.flight_number, d1.city as Origin, d2.city as Destination,
-                   f.departure_time, pa.assignment_date
+                f.departure_time, pa.assignment_date, pa.assignment_id
             FROM pilots p
             JOIN pilot_assignments pa ON p.pilot_id = pa.pilot_id
             JOIN flights f ON pa.flight_id = f.flight_id
@@ -496,6 +492,7 @@ class DBOperations:
                     print(f"Route: {flight[2]} -> {flight[3]}")
                     print(f"Departure: {flight[4]}")
                     print(f"Assignment Date: {flight[5]}")
+                    print(f"Assignment ID: {flight[6]}")
             else:
                 print("No flights scheduled for this pilot")
 
@@ -593,24 +590,20 @@ class DBOperations:
             self.conn.close()
 
     def summarise_flights_by_destination(self):
-        """Show number of flights per destination."""
+        """Shows a summary of flights per destination."""
         try:
             self.get_connection()
-
-            # SQL query to count flights by destination
             query = """
             SELECT d.city, COUNT(f.flight_id) as flight_count
             FROM flights f
-            JOIN destinations AS d ON f.destination_id = d.destination_id
+            JOIN destinations d ON f.destination_id = d.destination_id
             GROUP BY d.city
             """
             self.cur.execute(query)
             results = self.cur.fetchall()
-
             print("\nFlight Counts by Destination:")
-            # Print into table
             for row in results:
-                print(f"Destination: {row[0]}: {row[1]} flight(s)")
+                print(f"Destination: {row[0]} -- {row[1]} flights")
         except Exception as e:
             print(f"Error summarising flights: {e}")
         finally:
