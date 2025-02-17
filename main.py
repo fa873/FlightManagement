@@ -93,7 +93,7 @@ class DBOperations:
             self.conn.close()
 
     def get_connection(self):
-        """Establish a fresh connection to the database, making sure the database connection is active for each operation"""
+        """Establish a fresh connection to the database and return the cursor object, making sure the database connection is active for each operation"""
         self.conn = sqlite3.connect("FlightManagement.db")
         self.cur = self.conn.cursor()
 
@@ -104,21 +104,21 @@ class DBOperations:
 
             # Sample pilot data
             pilots = [
-                ("James Smith", "UK10001", 15),
-                ("Jane Smith", "UK10002", 12),
-                ("Michael Scott", "UK10003", 8),
-                ("Tim Robinson", "UK10004", 20),
-                ("Taylor Swift", "UK10005", 10),
-                ("Matthew Fox", "UK10006", 7),
-                ("John Locke", "UK10007", 5),
-                ("Jim Halpert", "UK10008", 18),
-                ("Adam Scott", "UK10009", 25),
-                ("Travis Touchdown", "UK10010", 3),
-                ("Sarah Connor", "UK10011", 22),
-                ("Ellen Ripley", "UK10012", 19),
-                ("Han Solo", "UK10013", 30),
-                ("Cloud Strife", "UK10014", 15),
-                ("Luke Skywalker", "UK10015", 12),
+                ("James Smith", "LIC10001", 15),
+                ("Jane Smith", "LIC10002", 12),
+                ("Michael Scott", "LIC10003", 8),
+                ("Tim Robinson", "LIC10004", 20),
+                ("Taylor Swift", "LIC10005", 10),
+                ("Matthew Fox", "LIC10006", 7),
+                ("John Locke", "LIC10007", 5),
+                ("Jim Halpert", "LIC10008", 18),
+                ("Adam Scott", "LIC10009", 25),
+                ("Travis Touchdown", "LIC10010", 3),
+                ("Sarah Connor", "LIC10011", 22),
+                ("Ellen Ripley", "LIC10012", 19),
+                ("Han Solo", "LIC10013", 30),
+                ("Cloud Strife", "LIC10014", 15),
+                ("Luke Skywalker", "LIC10015", 12),
             ]
 
             # Insert sample pilot data
@@ -150,21 +150,21 @@ class DBOperations:
 
             # Sample flight data
             flights = [
-                ("BA101", 1, 2, "2025-03-10 10:00:00", "Scheduled"),
-                ("BA102", 2, 1, "2025-03-10 14:00:00", "Scheduled"),
-                ("BA103", 1, 3, "2025-03-11 09:00:00", "Scheduled"),
-                ("BA104", 3, 4, "2025-03-12 12:00:00", "Scheduled"),
-                ("BA105", 4, 5, "2025-03-13 15:00:00", "Scheduled"),
-                ("BA106", 5, 6, "2025-03-14 08:00:00", "Scheduled"),
-                ("BA107", 6, 7, "2025-03-15 11:00:00", "Scheduled"),
-                ("BA108", 7, 8, "2025-03-16 13:00:00", "Scheduled"),
-                ("BA109", 8, 9, "2025-03-17 16:00:00", "Scheduled"),
-                ("BA110", 9, 10, "2025-03-18 18:00:00", "Scheduled"),
-                ("BA111", 10, 11, "2025-03-19 07:00:00", "Scheduled"),
-                ("BA112", 11, 12, "2025-03-20 09:00:00", "Scheduled"),
-                ("BA113", 12, 13, "2025-03-21 11:00:00", "Scheduled"),
-                ("BA114", 13, 14, "2025-03-22 13:00:00", "Scheduled"),
-                ("BA115", 14, 15, "2025-03-23 15:00:00", "Scheduled"),
+                ("XYZ101", 1, 2, "2025-03-10 10:00:00", "Scheduled"),
+                ("XYZ102", 2, 1, "2025-03-10 14:00:00", "Scheduled"),
+                ("XYZ103", 1, 3, "2025-03-11 09:00:00", "Scheduled"),
+                ("XYZ104", 3, 4, "2025-03-12 12:00:00", "Scheduled"),
+                ("XYZ105", 4, 5, "2025-03-13 15:00:00", "Scheduled"),
+                ("XYZ106", 5, 6, "2025-03-14 08:00:00", "Scheduled"),
+                ("XYZ107", 6, 7, "2025-03-15 11:00:00", "Scheduled"),
+                ("XYZ108", 7, 8, "2025-03-16 13:00:00", "Scheduled"),
+                ("XYZ109", 8, 9, "2025-03-17 16:00:00", "Scheduled"),
+                ("XYZ110", 9, 10, "2025-03-18 18:00:00", "Scheduled"),
+                ("XYZ111", 10, 11, "2025-03-19 07:00:00", "Scheduled"),
+                ("XYZ112", 11, 12, "2025-03-20 09:00:00", "Scheduled"),
+                ("XYZ113", 12, 13, "2025-03-21 11:00:00", "Scheduled"),
+                ("XYZ114", 13, 14, "2025-03-22 13:00:00", "Scheduled"),
+                ("XYZ115", 14, 15, "2025-03-23 15:00:00", "Scheduled"),
             ]
 
             # Insert flight data
@@ -173,22 +173,22 @@ class DBOperations:
 
             # Sample pilot assignments (with multiple pilots per flight, e.g. copilots)
             assignments = [
-                (1, 1, "2025-02-01 10:00:00"),  # Flight BA101, Pilot 1
-                (1, 2, "2025-02-01 10:00:00"),  # Flight BA101, Pilot 2
-                (2, 3, "2025-02-02 14:00:00"),  # Flight BA102, Pilot 3
-                (3, 4, "2025-02-03 09:00:00"),  # Flight BA103, Pilot 4
-                (3, 5, "2025-03-03 09:00:00"),  # Flight BA103, Pilot 5
-                (4, 6, "2025-03-04 12:00:00"),  # Flight BA104, Pilot 6
-                (5, 7, "2025-03-05 15:00:00"),  # Flight BA105, Pilot 7
-                (6, 8, "2025-03-06 08:00:00"),  # Flight BA106, Pilot 8
-                (7, 9, "2025-03-07 11:00:00"),  # Flight BA107, Pilot 9
-                (8, 10, "2025-03-08 13:00:00"),  # Flight BA108, Pilot 10
-                (8, 1, "2025-03-08 13:00:00"),  # Flight BA108, Pilot 1
-                (9, 11, "2025-03-09 16:00:00"),  # Flight BA109, Pilot 11
-                (10, 12, "2025-03-10 18:00:00"),  # Flight BA110, Pilot 12
-                (11, 13, "2025-03-11 07:00:00"),  # Flight BA111, Pilot 13
-                (12, 14, "2025-03-12 09:00:00"),  # Flight BA112, Pilot 14
-                (12, 15, "2025-03-12 09:00:00"),  # Flight BA112, Pilot 15
+                (1, 1, "2025-02-01 10:00:00"),  # Flight XYZ101, Pilot 1
+                (1, 2, "2025-02-01 10:00:00"),  # Flight XYZ101, Pilot 2
+                (2, 3, "2025-02-02 14:00:00"),  # Flight XYZ102, Pilot 3
+                (3, 4, "2025-02-03 09:00:00"),  # Flight XYZ103, Pilot 4
+                (3, 5, "2025-03-03 09:00:00"),  # Flight XYZ103, Pilot 5
+                (4, 6, "2025-03-04 12:00:00"),  # Flight XYZ104, Pilot 6
+                (5, 7, "2025-03-05 15:00:00"),  # Flight XYZ105, Pilot 7
+                (6, 8, "2025-03-06 08:00:00"),  # Flight XYZ106, Pilot 8
+                (7, 9, "2025-03-07 11:00:00"),  # Flight XYZ107, Pilot 9
+                (8, 10, "2025-03-08 13:00:00"),  # Flight XYZ108, Pilot 10
+                (8, 1, "2025-03-08 13:00:00"),  # Flight XYZ108, Pilot 1
+                (9, 11, "2025-03-09 16:00:00"),  # Flight XYZ109, Pilot 11
+                (10, 12, "2025-03-10 18:00:00"),  # Flight XYZ110, Pilot 12
+                (11, 13, "2025-03-11 07:00:00"),  # Flight XYZ111, Pilot 13
+                (12, 14, "2025-03-12 09:00:00"),  # Flight XYZ112, Pilot 14
+                (12, 15, "2025-03-12 09:00:00"),  # Flight XYZ112, Pilot 15
             ]
 
             # Insert sample assignments
@@ -537,8 +537,10 @@ class DBOperations:
                     "Enter new airport code (or press enter to skip): "
                 )
 
+                # to store updates and values
                 updates = []
                 values = []
+
                 if city:
                     updates.append("city = ?")
                     values.append(city)
@@ -549,10 +551,17 @@ class DBOperations:
                     updates.append("airport_code = ?")
                     values.append(airport_code)
 
+                # Only update if changes have been made
                 if updates:
+                    # append destination ID for the WHERE clause
                     values.append(dest_id)
+
+                    # dynamically build the query for each column that needs to be updated
                     query = f"UPDATE destinations SET {', '.join(updates)} WHERE destination_id = ?"
+
+                    # execute the query with all values which were stored
                     self.cur.execute(query, tuple(values))
+
                     self.conn.commit()
                     print("Destination updated successfully")
 
@@ -580,24 +589,20 @@ class DBOperations:
             self.conn.close()
 
     def summarise_flights_by_destination(self):
-        """Show number of flights per destination."""
+        """Shows a summary of flights per destination."""
         try:
             self.get_connection()
-
-            # SQL query to count flights by destination
             query = """
             SELECT d.city, COUNT(f.flight_id) as flight_count
             FROM flights f
-            JOIN destinations AS d ON f.destination_id = d.destination_id
+            JOIN destinations d ON f.destination_id = d.destination_id
             GROUP BY d.city
             """
             self.cur.execute(query)
             results = self.cur.fetchall()
-
             print("\nFlight Counts by Destination:")
-            # Print into table
             for row in results:
-                print(f"Destination: {row[0]}: {row[1]} flight(s)")
+                print(f"Destination: {row[0]} -- {row[1]} flights")
         except Exception as e:
             print(f"Error summarising flights: {e}")
         finally:
